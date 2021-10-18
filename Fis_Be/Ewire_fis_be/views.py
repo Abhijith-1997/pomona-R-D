@@ -13,18 +13,20 @@ baseUrl = '/api/v1/fis'
 @app.route('/', methods=['POST','GET'])
 def base():
     
-    return responses.upGetResponse(request)
+    return responses.upGetResponse()
 
-@app.route(baseUrl+'/login', methods = ['POST'])
+@app.route(baseUrl+'/cortex', methods = ['POST'])
 def user():
     valdata=validateReq(request)
     print("valdata",valdata)
 
     if(valdata['status']==200):
         print("checklogin")
-        checklog=constantslayer.checklogin(request)
+        checklog=constantslayer.backendapi(request)
+        # checklog=json.dumps(checklog)
         print("checklog",checklog)
-        checklog['resp_type']=="SUCCESS"
+        # print("type:",type(checklog))
+        checklog['resp_type']="SUCCESS"
         return jsonify(uitobe_response(checklog))
     else:
         request['resp_type']="FAIL"

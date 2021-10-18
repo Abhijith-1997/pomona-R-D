@@ -37,21 +37,23 @@ def convinptodict(input):
         #convert iny to dictionary
         return json.loads(input)
         
-def checklogin(req):
-    print("XXXXXX ")
+def backendapi(req):
+    print("XXXXXX")
     request = req.get_json()
     try:
         datadict = {"req_type":request['req_type'],"req_code":request['req_code'],
                     "apiname":request['apiname'],"em_reqid":request['em_reqid'],
                     "partner_reqid":request['partner_reqid'],"requestdata":request['requestdata'],"authToken":request['authtoken'],"em_endpoint":request['em_endpoint'],
                     "em_custid":request['em_custid'],"txntype":request["txntype"],"hash":request['hash'],"checksum":request['checksum']}
-        obj = standardresponses.commonValues
+
+        obj = standardresponses.commonValues[request['apiname']]  #eg:CORTEX
+        print("datadict",datadict)
         otherdata = {}
         # modulename = 'LOGIN'
         otherdata['parameters'] = obj
         otherdata['data'] = datadict
-        print('otherdata', otherdata)
-        BuildBeResp = staticfunctions.performRequest(otherdata, "checkUser")
+
+        BuildBeResp = staticfunctions.performRequest(otherdata)
         print("ivide ethi 1",BuildBeResp)
         return BuildBeResp
     except ValueError as e:
