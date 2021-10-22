@@ -9,7 +9,7 @@ from Ewire_fis_be.platformlayers import bllayer, constantslayer
 from Ewire_fis_be.responsemaster import responses
 from Ewire_fis_be.statics.staticfunctions import uitobe_response, validateReq
 from flask_cors import CORS
-baseUrl = '/api/v1/fis'
+baseUrl = '/api/v1/fis/be'
 @app.route('/', methods=['POST','GET'])
 def base():
     
@@ -21,7 +21,7 @@ def user():
     print("valdata",valdata)
 
     if(valdata['status']==200):
-        print("checklogin")
+        print("backendapi")
         checklog=constantslayer.backendapi(request)
         # checklog=json.dumps(checklog)
         print("checklog",checklog)

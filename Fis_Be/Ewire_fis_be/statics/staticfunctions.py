@@ -8,8 +8,9 @@ from Ewire_fis_be.platformlayers import constantslayer
 from Ewire_fis_be.statics import staticfunctions
 from Ewire_fis_be.responsemaster import responses
 from Ewire_fis_be.statics import apiconstants,staticconstants
-from Ewire_fis_be.statics.urlconstants import ENDPOINT, IP_DEV
+from Ewire_fis_be.statics.urlconstants import ENDPOINT, IP_DEV,FisConfig
 # COMMON RESPONSE CLASS
+
 class CommonReq2be:
     req_type : str
     req_code : datetime
@@ -227,3 +228,32 @@ def performRequest(request):
                 return responses.standardErrorResponseToUI
             responseofreq = r
     return responseofreq
+
+
+class PostRequestManager:
+     def postrequestManagerExtApi(data):
+        print("====inside postrequestManagerExtApi====")
+        try:
+            URL = FisConfig.getExtApiUrl()
+            header = FisConfig.getHeader()
+            # print(":::: FIRE EXT API :::::")
+            # print("URL ====>" + URL)
+            # print("HEADER ====>"+ str(header))
+            # print("REQ DATA ====>" + str(data))
+
+            r = requests.post(URL, headers=header, json = data)
+            # print("RESP FROM EXT API AS TEXT ==> ",r.text) 
+            # r.raise_for_status()
+            # return r.json()    
+            return r.text
+
+        except requests.exceptions.HTTPError as err:
+            return str(err)
+        except requests.Timeout as e:
+            return "Request Timed Out"
+        except requests.RequestException as e:
+            return str(e)
+        except requests.ConnectionError as e:
+            return str(e)
+        except Exception as e:
+            return str(e)

@@ -1,6 +1,6 @@
 
-fisCoreServer="192.168.0.238:8002/api/v1/fis"
+fisCoreServer="127.0.0.1:8002"
 fisCoreHeader={"content_Type":"application/json"}
 fisCoreReqType=""
-fisCoreEndpoint=""
+fisCoreEndpoint="/api/v1/ewire/core/fis/apiDetails/byApiName"
 fisCoreMethodType="POST"
