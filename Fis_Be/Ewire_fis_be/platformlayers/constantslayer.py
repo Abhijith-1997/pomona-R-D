@@ -2,6 +2,7 @@ from Ewire_fis_be.maass import maasslogger
 import json,jsonschema
 import re
 from Ewire_fis_be.statics import staticfunctions
+from Ewire_fis_be.statics.staticfunctions import PostRequestManager
 from Ewire_fis_be.platformlayers import standardresponses
 from Ewire_fis_be.statics import urlconstants
 from jsonschema import validate
@@ -37,29 +38,84 @@ def convinptodict(input):
         #convert iny to dictionary
         return json.loads(input)
         
-def checklogin(req):
-    print("XXXXXX ")
+def backendapi(req):
+    print("XXXXXX")
     request = req.get_json()
     try:
         datadict = {"req_type":request['req_type'],"req_code":request['req_code'],
                     "apiname":request['apiname'],"em_reqid":request['em_reqid'],
                     "partner_reqid":request['partner_reqid'],"requestdata":request['requestdata'],"authToken":request['authtoken'],"em_endpoint":request['em_endpoint'],
                     "em_custid":request['em_custid'],"txntype":request["txntype"],"hash":request['hash'],"checksum":request['checksum']}
-        obj = standardresponses.commonValues
+
+        obj = standardresponses.commonValues[request['apiname']]  #eg:CORTEX
+        print("datadict",datadict)
         otherdata = {}
         # modulename = 'LOGIN'
         otherdata['parameters'] = obj
         otherdata['data'] = datadict
-        print('otherdata', otherdata)
-        BuildBeResp = staticfunctions.performRequest(otherdata, "checkUser")
-        print("ivide ethi 1",BuildBeResp)
-        return BuildBeResp
+
+        # response from core
+        FisCoreResp = staticfunctions.performRequest(otherdata)        
+        print("=========resposne from CORE is=====")
+        print("TYPE====",type(FisCoreResp))
+        print("VALUE===",FisCoreResp)
+
+        if FisCoreResp['resp_type'] == "FAILURE":
+            return FisCoreResp
+
+        elif FisCoreResp['resp_type'] == "SUCCESS":
+                ewireReqData = {
+                    "ewire_reqid": FisCoreResp['ewire_reqid'],
+                    "timestamp" : str(urlconstants.TIME_NOW),
+                    "ewire_custid" : FisCoreResp['ewire_custid'],
+                    "api_name": FisCoreResp['api_name'],
+                    "partner_id" : FisCoreResp['partner_id'],
+                    "ext_base_url": FisCoreResp['ext_base_url'],
+                    "ext_end_point_url": FisCoreResp['ext_end_point_url'],
+                    
+                    "api_header": FisCoreResp['api_header'], #Header for api provider
+                    "req_data": FisCoreResp['req_data'] # req data for api provider
+                }
+        print("apiheader type "+str(type(FisCoreResp['api_header'])))
+        print("===========ewireReqData======")
+        print(ewireReqData)
+        postToExternal = PostRequestManager 
+        response = postToExternal.postrequestManagerExtApi(ewireReqData)
+        print("==============RESPONSE FROM EXTERNAL============")
+        print(response)
+        response = json.loads(response)
+        print("==============RESPONSE FROM EXTERNAL after loads============")
+        print(response)
+        try:
+            if type(response['resp_frm_ext_api']) == list:                        
+                print("++++RESP TYPE IS LIST++++")
+                return response
+
+            if 'Error' in response['resp_frm_ext_api'] or 'error desc' in response['resp_frm_ext_api']:
+                response['resp_frm_ext_api']['resp_type'] = "FAILURE"
+                return response
+            else:
+                response['resp_frm_ext_api']['resp_type'] = "SUCCESS"
+                return response
+        except KeyError:
+            response['resp_frm_ext_api']['resp_type'] = "FAILURE"
+        except Exception as e:
+            return str(e)
+        return response
+                
+    except Exception as e:
+        return str(e)
+
+        
+        print("ivide ethi 1",FisCoreResp)
+        return FisCoreResp
     except ValueError as e:
         print("EXCEPTION1",str(e))
         return str(e)
     except Exception as e:
         print("EXCEPTION2",str(e))
         return str(e)
+        
 def validateJSON(jsonData, schemaname):
     str1 = {}
     try:

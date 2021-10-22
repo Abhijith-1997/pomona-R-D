@@ -9,11 +9,22 @@ userSchema = {
     'ewire_reqid': {'type':'string'},
     'partner_reqid': {'type':'string'},
     'req_timestamp': {'type':'integer'},
-    'requestdata': {'username': {'type':'string'},
-                     'password': {'type':'string'}},
+    'requestdata': {'keyAlias': {'type':'string'},
+                     'institutionId': {'type':'string'},
+                     'appId': {'type':'string'},
+                     'signature': {'type':'string'},
+                    'sessionKey': {'type':'string'},
+                     },
     'authtoken': {'type':'string'},
     'ewire_endpoint': {'type':'string'},
     'ewire_custid': {'type':'string'},
     'txntype': {'type':'string'},
     'hash': {'type':'string'},
     'checksum': {'type':'string'}}
+
+
+
+
+
+
+

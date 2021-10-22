@@ -10,5 +10,5 @@ def masslogger(data, error):
     #Log the error and the request data parameters
     maassobj=standardresponses.commonValues
     #core
-    maaass=staticfunctions.performRequest(maassobj['CORELOGIN'],maassdata)
+    maaass=staticfunctions.performRequest(maassobj['CORTEX'],maassdata)
     return maaass

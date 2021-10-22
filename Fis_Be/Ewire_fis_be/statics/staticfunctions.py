@@ -8,8 +8,9 @@ from Ewire_fis_be.platformlayers import constantslayer
 from Ewire_fis_be.statics import staticfunctions
 from Ewire_fis_be.responsemaster import responses
 from Ewire_fis_be.statics import apiconstants,staticconstants
-from Ewire_fis_be.statics.urlconstants import ENDPOINT, IP_DEV
+from Ewire_fis_be.statics.urlconstants import ENDPOINT, IP_DEV,FisConfig
 # COMMON RESPONSE CLASS
+
 class CommonReq2be:
     req_type : str
     req_code : datetime
@@ -26,8 +27,8 @@ class CommonReq2be:
     checksum=str
     def __init__(self, rqstdata):
         print("DATAAA",rqstdata)
-        self.resp_code = rqstdata["req_code"]
-        self.resp_type = rqstdata["req_type"]
+        self.req_code = rqstdata["req_code"]
+ 
         self.message = rqstdata["message"]
         try:
             if rqstdata["em_reqid"] is None or rqstdata["em_custid"] is None:
@@ -52,6 +53,7 @@ class CommonReq2be:
         except Exception as e:
             print(e)
             raise Exception("exception while assigning timeStamp")
+            
 class CommonResponse:
     em_reqid : str
     timestamp : datetime
@@ -71,17 +73,17 @@ class CommonResponse:
             if respdata["em_reqid"] is None or respdata["em_reqid"] is None:
                  raise Exception("Attribute error,request param null")
             else:
-              self.em_reqid = respdata["em_reqid"]
-            self.em_custid = respdata["em_custid"]
-            self.resp_frm_bank = respdata["resp_frm_bank"]
-            self.resp_frm_ewire = respdata["resp_frm_ewire"]
-            self.resp_frm_cbs = respdata["resp_frm_cbs"]
-            self.resp_frm_ext = respdata["resp_frm_ext"]
-            self.resp_frm_maass = respdata["resp_frm_maass"]
-            self.resp_frm_blockc = respdata["resp_frm_blockc"]
-            self.resp_frm_mojaloop = respdata["resp_frm_mojaloop"]
-            self.resp_frm_rulengn = respdata["resp_frm_rulengn"]
-            self.timestamp = str(datetime.datetime.now())
+                self.em_reqid = respdata["em_reqid"]
+                self.em_custid = respdata["em_custid"]
+                self.resp_frm_bank = respdata["resp_frm_bank"]
+                self.resp_frm_ewire = respdata["resp_frm_ewire"]
+                self.resp_frm_cbs = respdata["resp_frm_cbs"]
+                self.resp_frm_ext = respdata["resp_frm_ext"]
+                self.resp_frm_maass = respdata["resp_frm_maass"]
+                self.resp_frm_blockc = respdata["resp_frm_blockc"]
+                self.resp_frm_mojaloop = respdata["resp_frm_mojaloop"]
+                self.resp_frm_rulengn = respdata["resp_frm_rulengn"]
+                self.timestamp = str(datetime.datetime.now())
         except ValueError :
             raise Exception("ValueError exception  while assigning timeStamp")
         except TypeError:
@@ -89,6 +91,7 @@ class CommonResponse:
         except Exception as e:
             print(e)
             raise Exception("exception while assigning timeStamp")
+
 def checkrequest(request):
     data = request
     if data is None or data == {}:
@@ -99,32 +102,36 @@ def checkrequest(request):
         return {"response" : json.dumps({"Success": "It Works"}),
                         "status" : 200,
                         "mimetype" : 'application/json'}
+
 def uitobe_response(resptype):
+    print("reached uitobe_response")
     if(resptype['resp_type'] == "SUCCESS"):
         resptype['Response'] = {"request_status": "SUCCESS", "Status":" Transaction completed Successfully"}
         return CommonResponse(resptype).__dict__
     else:
         respdata = {"request_status": "FAIL", "Status":" Transaction failed with errors"}
         return CommonResponse(respdata).__dict__
-def logger_srv(logData):
-    if(logData['reqtype'] == "SUCCESS"):
-        logData['apiname'] =  apiconstants.userLogin
-        logData['level'] = "SUCCESS"
-        logData['logtype'] = "SUCCESS LOG"
-        logData['logdata'] = json.dumps(logData)
-        logData['reqtype'] = logData['req_type']
-        logData['timestamp'] = str(datetime.datetime.now())
-        #logData['collection'] = config.LOG_TABLE
-        logData['database'] = staticconstants.DB_NAME
-        resp = successlogreq(logData)
-    else:
-        if(logData['reqtype'] == "FAIL"):
-            resp = faillogreq(logData)
-            print("")
-        else:
-            print("FAIL")
-    print("Response: " + str(resp))
-    return resp
+
+# def logger_srv(logData):
+#     if(logData['reqtype'] == "SUCCESS"):
+#         logData['apiname'] =  apiconstants.userLogin
+#         logData['level'] = "SUCCESS"
+#         logData['logtype'] = "SUCCESS LOG"
+#         logData['logdata'] = json.dumps(logData)
+#         logData['reqtype'] = logData['req_type']
+#         logData['timestamp'] = str(datetime.datetime.now())
+#         #logData['collection'] = config.LOG_TABLE
+#         logData['database'] = staticconstants.DB_NAME
+#         resp = successlogreq(logData)
+#     else:
+#         if(logData['reqtype'] == "FAIL"):
+#             resp = faillogreq(logData)
+#             print("")
+#         else:
+#             print("FAIL")
+#     print("Response: " + str(resp))
+#     return resp
+
 def successlogreq(reqdata):
     # REQUEST LOGGING
     try:
@@ -137,6 +144,7 @@ def successlogreq(reqdata):
         return str(e)
     except Exception as e:
         return str(e)
+
 def faillogreq(reqdata):
     reqst = "" + reqdata + ""
     return reqst
@@ -148,9 +156,10 @@ def validateReq(req):
         print("REACHED Try ")
 
         valdata = json.loads(req.data.decode('utf-8'))
-        if valdata['apiname']== apiconstants.userLogin:
 
-            validatereq = constantslayer.validateJSON(valdata, staticconstants.userSchema)
+        validatereq = constantslayer.validateJSON(valdata, staticconstants.userSchema)
+        print("validatereq:",validatereq)
+
             
 
             # responses.standardErrorResponseToUI["sourceoflog"] = "bcore-checklogin"
@@ -171,13 +180,20 @@ def validateReq(req):
     except Exception as e:
         return str(e)
 
-def performRequest(request, modulename):
-    server = request['parameters']['LOGIN']['server']
-    headerz = request['parameters']['LOGIN']['headerz']
-    endpoint = request['parameters']['LOGIN']['endpoint']
+def performRequest(request):
+    print("")
+    print("reached performrequest")
+    print("")
+
+    print("request",request)
+    print("")
+
+    server = request['parameters']['server']
+    headerz = request['parameters']['headerz']
+    endpoint = request['parameters']['endpoint']
     reqdata = request['data']['requestdata']
-    reqType = request['parameters']['LOGIN']['reqtype']
-    methodType = request['parameters']['LOGIN']['methodtype']
+    reqType = request['parameters']['reqtype']
+    methodType = request['parameters']['methodtype']
     if(reqType == "SSL"):
         url = "https://" + server + endpoint
     else:
@@ -189,8 +205,12 @@ def performRequest(request, modulename):
         print("HEADER",str(headerz))
         payload = json.dumps(reqdata)
         print("PL = ",payload)
+        print("")
         try:
+            print("entered perfrm try")
             r = requests.post(url, data = payload, headers=headerz)
+            print("")
+            print("r",r)
             if(r.status_code == 200):
                 return r.text
             else:
@@ -208,3 +228,32 @@ def performRequest(request, modulename):
                 return responses.standardErrorResponseToUI
             responseofreq = r
     return responseofreq
+
+
+class PostRequestManager:
+     def postrequestManagerExtApi(data):
+        print("====inside postrequestManagerExtApi====")
+        try:
+            URL = FisConfig.getExtApiUrl()
+            header = FisConfig.getHeader()
+            # print(":::: FIRE EXT API :::::")
+            # print("URL ====>" + URL)
+            # print("HEADER ====>"+ str(header))
+            # print("REQ DATA ====>" + str(data))
+
+            r = requests.post(URL, headers=header, json = data)
+            # print("RESP FROM EXT API AS TEXT ==> ",r.text) 
+            # r.raise_for_status()
+            # return r.json()    
+            return r.text
+
+        except requests.exceptions.HTTPError as err:
+            return str(err)
+        except requests.Timeout as e:
+            return "Request Timed Out"
+        except requests.RequestException as e:
+            return str(e)
+        except requests.ConnectionError as e:
+            return str(e)
+        except Exception as e:
+            return str(e)

@@ -9,22 +9,24 @@ from Ewire_fis_be.platformlayers import bllayer, constantslayer
 from Ewire_fis_be.responsemaster import responses
 from Ewire_fis_be.statics.staticfunctions import uitobe_response, validateReq
 from flask_cors import CORS
-baseUrl = '/api/v1/fis'
+baseUrl = '/api/v1/fis/be'
 @app.route('/', methods=['POST','GET'])
 def base():
     
-    return responses.upGetResponse(request)
+    return responses.upGetResponse()
 
-@app.route(baseUrl+'/login', methods = ['POST'])
+@app.route(baseUrl+'/cortex', methods = ['POST'])
 def user():
     valdata=validateReq(request)
     print("valdata",valdata)
 
     if(valdata['status']==200):
-        print("checklogin")
-        checklog=constantslayer.checklogin(request)
+        print("backendapi")
+        checklog=constantslayer.backendapi(request)
+        # checklog=json.dumps(checklog)
         print("checklog",checklog)
-        checklog['resp_type']=="SUCCESS"
+        # print("type:",type(checklog))
+        checklog['resp_type']="SUCCESS"
         return jsonify(uitobe_response(checklog))
     else:
         request['resp_type']="FAIL"
