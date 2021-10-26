@@ -29,7 +29,7 @@ class CommonUtil:
         
         try:
             dataDupe={}
-            dataDupe['database']=""
+            dataDupe['database']="pomona_maass"
             dataDupe['collection']="apix"
             apiDict = False
 
@@ -42,7 +42,7 @@ class CommonUtil:
             if 'partner_reqid' in data.keys():
 
                 try:
-                    queryDict = {"partner_id":data['partner_reqid'],"apiName":data['apiname']}
+                    queryDict = {"partnerid":data['partner_reqid'],"apiName":data['apiname']}
                     print(queryDict)
                     try:
                                                 
@@ -59,7 +59,7 @@ class CommonUtil:
                     custDict = MongoAPI.readOne('ccp_customers',{"custId":data['em_custid']})
                     custID = data['em_custid']
                     try:
-                        queryDict = {"partner_reqid":custDict['partner_reqid'],"apiname":data['apiname']}
+                        queryDict = {"partnerid":custDict['partner_reqid'],"apiName":data['apiname']}
                         try:
                             # apiDict = Database.readOne('apix',queryDict)
                             apiDict=MongoAPI(dataDupe).readOne(queryDict)
@@ -83,7 +83,7 @@ class CommonUtil:
                 print("success apiDict")
                 response = {
                     "cust_id": apiDict["em_custid"],
-                    "partner_id": apiDict['partner_reqid'],
+                    "partner_reqid": apiDict['partnerid'],
                     "ext_base_url": apiDict['apiURL'],
                     "ext_end_point_name": apiDict['apiEndpoint'],
                     # "api_header": api_header,
