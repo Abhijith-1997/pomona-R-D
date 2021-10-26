@@ -6,7 +6,7 @@ from Ewire_fis_core.constants import config
 from Ewire_fis_core.constants import constfns
 from Ewire_fis_core.statics.dbconstants import MongoAPI
 from Ewire_fis_core.statics import staticconstants
-# from json import DjangoJSONEncoder
+from json import JSONEncoder
 from requests import request
 
 import hashlib
@@ -26,32 +26,43 @@ logger= logging.getLogger('GET API DETAILS BY API NAME::')
 class CommonUtil:
     def getByApiName(data):
         print("entered getApiByName")
+        
         try:
+            dataDupe={}
+            dataDupe['database']=""
+            dataDupe['collection']="apix"
             apiDict = False
-            Database = MongoAPI
+
+            # Database = MongoAPI()
          
             logger.info("REQUEST FOR GET API BY NAME : " + str(data))
 
             #ToDO validations of request parameters
-            if 'partner_id' in data.keys():
+            # if 'partner_id' in data.keys():
+            if 'partner_reqid' in data.keys():
+
                 try:
-                    queryDict = {"partnerid":data['partner_id'],"apiName":data['api_name']}
+                    queryDict = {"partner_id":data['partner_reqid'],"apiName":data['apiname']}
                     print(queryDict)
                     try:
-                        apiDict = Database.readOne('apix',queryDict)
+                                                
+                        apiDict=MongoAPI(dataDupe).readOne(queryDict)
+
+                        print("apiDict",apiDict)
                     except:
                         apiDict = False
                 except:
                     apiDict = False
 
-            elif 'cust_id' in data.keys():
+            elif 'em_custid' in data.keys():
                 try:
-                    custDict = Database.readOne('ccp_customers',{"custId":data['CustId']})
-                    custID = data['CustId']
+                    custDict = MongoAPI.readOne('ccp_customers',{"custId":data['em_custid']})
+                    custID = data['em_custid']
                     try:
-                        queryDict = {"partnerid":custDict['partnerId'],"apiName":data['apiName']}
+                        queryDict = {"partner_reqid":custDict['partner_reqid'],"apiname":data['apiname']}
                         try:
-                            apiDict = Database.readOne('apix',queryDict)
+                            # apiDict = Database.readOne('apix',queryDict)
+                            apiDict=MongoAPI(dataDupe).readOne(queryDict)
                         except:
                             apiDict = False
                     except:
@@ -68,16 +79,28 @@ class CommonUtil:
                 if 'req_data' in data:
                     req_data = data['req_data']
 
+
                 print("success apiDict")
                 response = {
-                    "cust_id": apiDict["id"],
-                    "partner_id": apiDict['partnerid'],
+                    "cust_id": apiDict["em_custid"],
+                    "partner_id": apiDict['partner_reqid'],
                     "ext_base_url": apiDict['apiURL'],
                     "ext_end_point_name": apiDict['apiEndpoint'],
                     # "api_header": api_header,
                     "api_header":apiDict["apiHeader"],
                     "req_data": req_data
                 } 
+
+                # print("success apiDict")
+                # response = {
+                #     "cust_id": apiDict["id"],
+                #     "partner_id": apiDict['partnerid'],
+                #     "ext_base_url": apiDict['apiURL'],
+                #     "ext_end_point_name": apiDict['apiEndpoint'],
+                #     # "api_header": api_header,
+                #     "api_header":apiDict["apiHeader"],
+                #     "req_data": req_data
+                # } 
             else:
                 print("failed apiDict")
                 response = False

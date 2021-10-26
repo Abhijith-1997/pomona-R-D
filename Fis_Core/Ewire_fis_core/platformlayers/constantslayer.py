@@ -73,7 +73,6 @@ timeStamp = str(datetime.datetime.now())
 def getDetails(request):
     print("insidde  getDetails")
     try: 
-            # print("CREATE PARTY DOCUMENT URL :: REQ DATA ", request)
         modPartyObj = staticfunctions.CommonUtil
         resp = modPartyObj.getByApiName(request)
                 # print("RESPONSE FROM GET API BY NAME ==> ",resp)

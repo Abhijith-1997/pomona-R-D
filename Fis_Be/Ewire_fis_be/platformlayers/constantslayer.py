@@ -63,12 +63,13 @@ def backendapi(req):
         if FisCoreResp['resp_type'] == "FAILURE":
             return FisCoreResp
 
+# for external api
         elif FisCoreResp['resp_type'] == "SUCCESS":
                 ewireReqData = {
                     "ewire_reqid": FisCoreResp['ewire_reqid'],
                     "timestamp" : str(urlconstants.TIME_NOW),
                     "ewire_custid" : FisCoreResp['ewire_custid'],
-                    "api_name": FisCoreResp['api_name'],
+                    "apiname": FisCoreResp['apiname'],
                     "partner_id" : FisCoreResp['partner_id'],
                     "ext_base_url": FisCoreResp['ext_base_url'],
                     "ext_end_point_url": FisCoreResp['ext_end_point_url'],

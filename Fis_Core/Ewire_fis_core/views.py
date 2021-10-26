@@ -28,137 +28,138 @@ def getApiName():
     try:
         print("RECEIVED REQ FROM BE")
         reqDataJson = request.get_json()
+        print("gjdhj",reqDataJson)
         # reqData = request.data.decode('utf-8').replace("'",'"')
-        reqDataJson = json.loads(reqDataJson)
+        # reqDataJson = json.loads(reqDataJson)
         print("RECEIVED DATA :: ", type(reqDataJson))
 
         print("REQUEST FOR URLS FOR API NAME : ", reqDataJson)
 
-        if reqDataJson["api_name"] == "Authenticate":
+        if reqDataJson["apiname"] == "Authenticate":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "CARD_VAL":
-            return constantslayer.getDetails(reqDataJson)
-        
-        elif reqDataJson["api_name"] == "CARD_EXE":
-            return constantslayer.getDetails(reqDataJson)
-
-        elif reqDataJson["api_name"] == "CARD_CNCL_VAL":
+        elif reqDataJson["apiname"] == "CARD_VAL":
             return constantslayer.getDetails(reqDataJson)
         
-        elif reqDataJson["api_name"] == "CARD_CNCL_EXE":
+        elif reqDataJson["apiname"] == "CARD_EXE":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "CARD_ENQ_VAL":
-            return constantslayer.getDetails(reqDataJson)
-        
-        elif reqDataJson["api_name"] == "CARD_ENQ_EXE":
-            return constantslayer.getDetails(reqDataJson)
-
-        elif reqDataJson["api_name"] == "CARD_STATUS_VAL":
-            return constantslayer.getDetails(reqDataJson)
-
-        elif reqDataJson["api_name"] == "CARD_STATUS_EXE":
-            return constantslayer.getDetails(reqDataJson)
-
-        elif reqDataJson["api_name"] == "CUST_UPDATE_VAL":
-            return constantslayer.getDetails(reqDataJson)
-
-        elif reqDataJson["api_name"] == "CUST_UPDATE_EXE":
+        elif reqDataJson["apiname"] == "CARD_CNCL_VAL":
             return constantslayer.getDetails(reqDataJson)
         
-        elif reqDataJson["api_name"] == "CARD_REPLCMNT_VAL":
+        elif reqDataJson["apiname"] == "CARD_CNCL_EXE":
+            return constantslayer.getDetails(reqDataJson)
+
+        elif reqDataJson["apiname"] == "CARD_ENQ_VAL":
             return constantslayer.getDetails(reqDataJson)
         
-        elif reqDataJson["api_name"] == "CUST_REPLCMNT_EXE":
+        elif reqDataJson["apiname"] == "CARD_ENQ_EXE":
+            return constantslayer.getDetails(reqDataJson)
+
+        elif reqDataJson["apiname"] == "CARD_STATUS_VAL":
+            return constantslayer.getDetails(reqDataJson)
+
+        elif reqDataJson["apiname"] == "CARD_STATUS_EXE":
+            return constantslayer.getDetails(reqDataJson)
+
+        elif reqDataJson["apiname"] == "CUST_UPDATE_VAL":
+            return constantslayer.getDetails(reqDataJson)
+
+        elif reqDataJson["apiname"] == "CUST_UPDATE_EXE":
+            return constantslayer.getDetails(reqDataJson)
+        
+        elif reqDataJson["apiname"] == "CARD_REPLCMNT_VAL":
+            return constantslayer.getDetails(reqDataJson)
+        
+        elif reqDataJson["apiname"] == "CUST_REPLCMNT_EXE":
             return constantslayer.getDetails(reqDataJson)
         
 
-        elif reqDataJson["api_name"] == "CARD_ISSUE_VAL'":
+        elif reqDataJson["apiname"] == "CARD_ISSUE_VAL'":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "CARD_ISSUE_EXE":
+        elif reqDataJson["apiname"] == "CARD_ISSUE_EXE":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "CARD_ACT_VAL":
-            return constantslayer.getDetails(reqDataJson)
-
-
-        elif reqDataJson["api_name"] == "CARD_ACT_EXE":
+        elif reqDataJson["apiname"] == "CARD_ACT_VAL":
             return constantslayer.getDetails(reqDataJson)
 
 
-        elif reqDataJson["api_name"] == "CARD_UPGRADE_VAL":
-            return constantslayer.getDetails(reqDataJson)
-
-        elif reqDataJson["api_name"] == "CARD_UPGRADE_EXE":
-            return constantslayer.getDetails(reqDataJson)
-
-        elif reqDataJson["api_name"] == "CUST_DET_ENQ":
+        elif reqDataJson["apiname"] == "CARD_ACT_EXE":
             return constantslayer.getDetails(reqDataJson)
 
 
-        elif reqDataJson["api_name"] == "VIRTUAL_CARD_VAL":
+        elif reqDataJson["apiname"] == "CARD_UPGRADE_VAL":
+            return constantslayer.getDetails(reqDataJson)
+
+        elif reqDataJson["apiname"] == "CARD_UPGRADE_EXE":
+            return constantslayer.getDetails(reqDataJson)
+
+        elif reqDataJson["apiname"] == "CUST_DET_ENQ":
+            return constantslayer.getDetails(reqDataJson)
+
+
+        elif reqDataJson["apiname"] == "VIRTUAL_CARD_VAL":
             return constantslayer.getDetails(reqDataJson)
 
         
-        elif reqDataJson["api_name"] == "VIRTUAL_CARD_EXE":
+        elif reqDataJson["apiname"] == "VIRTUAL_CARD_EXE":
             return constantslayer.getDetails(reqDataJson)
 
 
-        elif reqDataJson["api_name"] == "VIRTUAL_PHYSCL_CARD":
+        elif reqDataJson["apiname"] == "VIRTUAL_PHYSCL_CARD":
             return constantslayer.getDetails(reqDataJson)
 
 
-        elif reqDataJson["api_name"] == "VIRTUAL_PHYSCL_CARD_EXE":
+        elif reqDataJson["apiname"] == "VIRTUAL_PHYSCL_CARD_EXE":
             return constantslayer.getDetails(reqDataJson)
 
 
-        elif reqDataJson["api_name"] == "ADJST_ACC_BLNC_VAL":
+        elif reqDataJson["apiname"] == "ADJST_ACC_BLNC_VAL":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "ADJST_ACC_BLNC_EXE":
+        elif reqDataJson["apiname"] == "ADJST_ACC_BLNC_EXE":
             return constantslayer.getDetails(reqDataJson)
         
-        elif reqDataJson["api_name"] == "ACC_LOAD_EXE":
+        elif reqDataJson["apiname"] == "ACC_LOAD_EXE":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "SET_PIN":
+        elif reqDataJson["apiname"] == "SET_PIN":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "CHANGE_PIN":
+        elif reqDataJson["apiname"] == "CHANGE_PIN":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "VERIFY_PIN_EXE":
+        elif reqDataJson["apiname"] == "VERIFY_PIN_EXE":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "TXN_DET_ENQ":
+        elif reqDataJson["apiname"] == "TXN_DET_ENQ":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "GIFT_CARD_VAL":
+        elif reqDataJson["apiname"] == "GIFT_CARD_VAL":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "GIFT_CARD_EXE":
+        elif reqDataJson["apiname"] == "GIFT_CARD_EXE":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "CVV2_VERFCTN":
+        elif reqDataJson["apiname"] == "CVV2_VERFCTN":
             return constantslayer.getDetails(reqDataJson)
  
-        elif reqDataJson["api_name"] == "CARD_DET_ENQ":
+        elif reqDataJson["apiname"] == "CARD_DET_ENQ":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "CHANNEL_UPDT":
+        elif reqDataJson["apiname"] == "CHANNEL_UPDT":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "LIMIT_UPDT":
+        elif reqDataJson["apiname"] == "LIMIT_UPDT":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["api_name"] == "CARD_DET_ENQ":
+        elif reqDataJson["apiname"] == "CARD_DET_ENQ":
             return constantslayer.getDetails(reqDataJson)
 
 
 
-        elif reqDataJson["api_name"] == "LIMIT_CHANNEL_UPDT":
+        elif reqDataJson["apiname"] == "LIMIT_CHANNEL_UPDT":
             return constantslayer.getDetails(reqDataJson)
 
 

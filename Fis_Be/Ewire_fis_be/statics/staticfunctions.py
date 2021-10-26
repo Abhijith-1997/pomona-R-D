@@ -153,9 +153,9 @@ def validateReq(req):
     # VALIDATE REQUEST
     print("REACHED VALIDATION ")
     try:
-        print("REACHED Try ")
+        print("REACHED Try")
 
-        valdata = json.loads(req.data.decode('utf-8'))
+        valdata = json.loads(req.data.decode("utf-8"))
 
         validatereq = constantslayer.validateJSON(valdata, staticconstants.userSchema)
         print("validatereq:",validatereq)
@@ -191,7 +191,7 @@ def performRequest(request):
     server = request['parameters']['server']
     headerz = request['parameters']['headerz']
     endpoint = request['parameters']['endpoint']
-    reqdata = request['data']['requestdata']
+    reqdata = request['data']
     reqType = request['parameters']['reqtype']
     methodType = request['parameters']['methodtype']
     if(reqType == "SSL"):

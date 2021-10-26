@@ -13,8 +13,9 @@ baseUrl = '/api/v1/fis/be'
 @app.route('/', methods=['POST','GET'])
 def base():
     
-    return responses.upGetResponse()
+    Response()
 
+    return responses.upGet
 @app.route(baseUrl+'/cortex', methods = ['POST'])
 def user():
     valdata=validateReq(request)
