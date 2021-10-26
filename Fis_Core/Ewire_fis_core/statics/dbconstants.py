@@ -7,7 +7,7 @@ class MongoAPI:
     def __init__(self, settings):
         log.basicConfig(level=log.DEBUG, format='%(asctime)s %(levelname)s:\n%(message)s\n')
         # self.client = MongoClient("mongodb://localhost:27017/")  # When only Mongo DB is running on Docker.
-        self.client = MongoClient("mongodb://192.168.0.238:27017/")     # When both Mongo and This application is running on
+        self.client = MongoClient("mongodb://localhost:27017/")     # When both Mongo and This application is running on
 
 
         
