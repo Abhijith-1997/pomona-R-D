@@ -6,7 +6,7 @@ from Ewire_fis_core.constants import config
 from Ewire_fis_core.constants import constfns
 from Ewire_fis_core.statics.dbconstants import MongoAPI
 from Ewire_fis_core.statics import staticconstants
-from json import JSONEncoder
+from django.core.serializers.json import DjangoJSONEncoder
 from requests import request
 
 import hashlib
@@ -29,20 +29,21 @@ class CommonUtil:
         
         try:
             dataDupe={}
-            dataDupe['database']=""
+            dataDupe['database']="pomona_maass"
             dataDupe['collection']="apix"
             apiDict = False
 
             # Database = MongoAPI()
          
             logger.info("REQUEST FOR GET API BY NAME : " + str(data))
+            print(" DATA :::HERE!!!!!",data)
 
             #ToDO validations of request parameters
             # if 'partner_id' in data.keys():
             if 'partner_reqid' in data.keys():
 
                 try:
-                    queryDict = {"partner_id":data['partner_reqid'],"apiName":data['apiname']}
+                    queryDict = {"partnerid":data['partner_reqid'],"apiName":data['apiname']}
                     print(queryDict)
                     try:
                                                 
@@ -59,7 +60,7 @@ class CommonUtil:
                     custDict = MongoAPI.readOne('ccp_customers',{"custId":data['em_custid']})
                     custID = data['em_custid']
                     try:
-                        queryDict = {"partner_reqid":custDict['partner_reqid'],"apiname":data['apiname']}
+                        queryDict = {"partnerid":custDict['partner_reqid'],"apiName":data['apiname']}
                         try:
                             # apiDict = Database.readOne('apix',queryDict)
                             apiDict=MongoAPI(dataDupe).readOne(queryDict)
@@ -76,17 +77,17 @@ class CommonUtil:
             if apiDict:
 
                 req_data = dict()
-                if 'req_data' in data:
-                    req_data = data['req_data']
+                if 'requestdata' in data:
+                    print("HEREERE DATAA",data)
+                    req_data = data['requestdata']
 
 
-                print("success apiDict")
+                print("success apiDict:::::::::")
                 response = {
-                    "cust_id": apiDict["em_custid"],
-                    "partner_id": apiDict['partner_reqid'],
+                    "em_custid": data["em_custid"],
+                    "partner_reqid": apiDict['partnerid'],
                     "ext_base_url": apiDict['apiURL'],
                     "ext_end_point_name": apiDict['apiEndpoint'],
-                    # "api_header": api_header,
                     "api_header":apiDict["apiHeader"],
                     "req_data": req_data
                 } 
@@ -101,11 +102,14 @@ class CommonUtil:
                 #     "api_header":apiDict["apiHeader"],
                 #     "req_data": req_data
                 # } 
+
+                print("response",response)
             else:
                 print("failed apiDict")
                 response = False
             
             print("RESPONSE @CORE getByApiName ",response)
+        
             return response
 
         except Exception as e:
@@ -113,48 +117,60 @@ class CommonUtil:
             
 # COMMON RESPONSE CLASS
 class CommonResponse:
-    em_reqid : str
-    timestamp : datetime
-    em_custid : str
+    resp_type :str
     resp_code : str
-    message : str
-    resp_type : str
-    resp_frm_yesb : dict
-    resp_frm_ewire : dict
+    em_reqid : str
+    timestamp : str
+    em_custid : str
+    api_name : str
+    partner_id : str
+    ext_base_url :str
+    ext_end_point_url :str
+    api_header : dict
+    resp_frm_database : dict
+    req_data : dict
+    is_revert : bool
 
     def __init__(self, respdata):
 
         print("DATARESp",respdata)
         print("DATAAA",type(respdata))
 
-        self.em_reqid= ""
-        self.timestamp= ""
-        self.em_custid= ""
-        self.resp_code= ""
-        self.message= ""
-        self.resp_type= ""
-        self.resp_frm_yesb=""
-        self.resp_frm_ewire=""
+        self.em_reqid = ""
+        self.timestamp = ""
+        self.em_custid = ""
+        self.api_name = ""
+        self.partner_id = ""
+        self.ext_base_url = ""
+        self.ext_end_point_url = ""
+        self.api_header = ""
+        self.resp_frm_database =""
+        self.req_data = ""
+        self.is_revert =""
+
         
-        self.resp_code = respdata["resp_code"]
-        self.resp_type = respdata["resp_type"]
-        self.message = respdata["message"]
+        self.resp_type =respdata['resp_type']       
+        self.resp_code = respdata['resp_code']
+
        
         try:
+            print("entered try::::")
             if respdata["em_reqid"] is None or respdata["em_reqid"] is None:
                  raise Exception("Attribute error,request param null")
                     
-            self.em_reqid = respdata["em_reqid"]
-            self.em_custid = respdata["em_custid"]
-            self.resp_frm_bank = respdata["resp_frm_bank"]
-            self.resp_frm_ewire = respdata["resp_frm_ewire"]
-            self.resp_frm_cbs = respdata["resp_frm_cbs"]
-            self.resp_frm_ext = respdata["resp_frm_ext"]
-            self.resp_frm_maass = respdata["resp_frm_maass"]
-            self.resp_frm_blockc = respdata["resp_frm_blockc"]
-            self.resp_frm_mojaloop = respdata["resp_frm_mojaloop"]
-            self.resp_frm_rulengn = respdata["resp_frm_rulengn"]
-            self.timestamp = str(datetime.datetime.now())
+            
+            self.em_reqid = respdata['em_reqid']
+            self.timestamp = datetime.datetime.now()
+            self.em_custid = respdata['em_custid']
+            self.api_name = respdata['api_name']
+            self.partner_id = respdata['partner_reqid']
+            self.ext_base_url = respdata['ext_base_url']
+            self.ext_end_point_url = respdata['ext_end_point_url']
+            self.api_header = respdata['api_header']
+            self.resp_frm_database = respdata['resp_frm_database']
+            self.req_data = respdata['req_data']
+            self.is_revert = respdata['is_revert']
+
 
         except ValueError :
             raise Exception("ValueError exception  while assigning timeStamp")
