@@ -19,8 +19,6 @@ def base():
 @app.route(baseUrl+'/cortex', methods = ['POST'])
 def user():
     valdata=validateReq(request)
-    print("valdata",valdata)
-
     if(valdata['status']==200):
         print("backendapi")
         checklog=constantslayer.backendapi(request)

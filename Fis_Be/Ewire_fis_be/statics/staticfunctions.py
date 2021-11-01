@@ -158,7 +158,7 @@ def validateReq(req):
         print("REACHED Try")
 
         valdata = json.loads(req.data.decode("utf-8"))
-
+       
         validatereq = constantslayer.validateJSON(valdata, staticconstants.userSchema)
         print("validatereq:",validatereq)
 
