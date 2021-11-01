@@ -61,8 +61,8 @@ class CommonResponse:
     resp_code : str
     message : str
     resp_type : str
+    resp_frm_yesb : dict
     resp_frm_ewire : dict
-    
     def __init__(self, respdata):
         print("DATARESp",respdata)
         print("DATAAA",type(respdata))
@@ -75,7 +75,6 @@ class CommonResponse:
             else:
                 self.em_reqid = respdata["em_reqid"]
                 self.em_custid = respdata["em_custid"]
-
                 self.resp_frm_bank = respdata["resp_frm_bank"]
                 self.resp_frm_ewire = respdata["resp_frm_ewire"]
                 self.resp_frm_cbs = respdata["resp_frm_cbs"]
@@ -85,7 +84,6 @@ class CommonResponse:
                 self.resp_frm_mojaloop = respdata["resp_frm_mojaloop"]
                 self.resp_frm_rulengn = respdata["resp_frm_rulengn"]
                 self.timestamp = str(datetime.datetime.now())
-     
         except ValueError :
             raise Exception("ValueError exception  while assigning timeStamp")
         except TypeError:

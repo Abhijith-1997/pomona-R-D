@@ -6,7 +6,7 @@ userSchema = {
     'req_type': {'type':'string'},
     'req_code': {"type":"integer"},
     'apiname': {'type':'string'},
-    'em_reqid': {'type':'string'},
+    'ewire_reqid': {'type':'string'},
     'partner_reqid': {'type':'string'},
     'req_timestamp': {'type':'integer'},
     'requestdata': {'keyAlias': {'type':'string'},
@@ -17,7 +17,7 @@ userSchema = {
                      },
     'authtoken': {'type':'string'},
     'ewire_endpoint': {'type':'string'},
-    'em_custid': {'type':'string'},
+    'ewire_custid': {'type':'string'},
     'txntype': {'type':'string'},
     'hash': {'type':'string'},
     'checksum': {'type':'string'}}

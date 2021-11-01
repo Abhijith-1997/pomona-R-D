@@ -38,11 +38,11 @@ class CardOrderHandler:
             
             cardOrderObj = CardOrderApiImpl
 
-            if reqDataJson['apiname'] == "CARD_VAL":
+            if reqDataJson['api_name'] == "CARD_VAL":
                 respObj = cardOrderObj.cardOrderValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "CARD_EXE":
+            elif reqDataJson['api_name'] == "CARD_EXE":
                 respObj = cardOrderObj.cardOrderExecution(reqDataJson)
                 return respObj
           
@@ -60,11 +60,11 @@ class CardCancelHandler:
             
             cardCancelObj = CardCancelApiImpl
 
-            if reqDataJson['apiname'] == "CARD_CNCL_VAL":
+            if reqDataJson['api_name'] == "CARD_CNCL_VAL":
                 respObj = cardCancelObj.cardCancelValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "CARD_CNCL_EXE":
+            elif reqDataJson['api_name'] == "CARD_CNCL_EXE":
                 respObj = cardCancelObj.cardCancelExecution(reqDataJson)
                 return respObj
           
@@ -82,11 +82,11 @@ class CardEnquiryHandler:
             
             cardEquiryObj = CardEnqiuryApiImpl
 
-            if reqDataJson['apiname'] == "CARD_CNCL_VAL":
+            if reqDataJson['api_name'] == "CARD_CNCL_VAL":
                 respObj =  cardEquiryObj.cardEnquiryValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "CARD_CNCL_EXE":
+            elif reqDataJson['api_name'] == "CARD_CNCL_EXE":
                 respObj =  cardEquiryObj.cardEnquiryExecution(reqDataJson)
                 return respObj
           
@@ -104,11 +104,11 @@ class CardStatusHandler:
             
             cardStatusObj = CardStatusApiImpl
 
-            if reqDataJson['apiname'] == "CARD_CNCL_VAL":
+            if reqDataJson['api_name'] == "CARD_CNCL_VAL":
                 respObj =  cardStatusObj.cardStatusValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "CARD_CNCL_EXE":
+            elif reqDataJson['api_name'] == "CARD_CNCL_EXE":
                 respObj =  cardStatusObj.cardStatusExecution(reqDataJson)
                 return respObj
           
@@ -126,11 +126,11 @@ class CustUpdateHandler:
             
             cardUpdateObj = CustUpdateApiImpl
 
-            if reqDataJson['apiname'] == "CUST_UPDATE_VAL":
+            if reqDataJson['api_name'] == "CUST_UPDATE_VAL":
                 respObj =  cardUpdateObj.custUpdateValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "CUST_UPDATE_EXE":
+            elif reqDataJson['api_name'] == "CUST_UPDATE_EXE":
                 respObj =  cardUpdateObj.custUpdateExecution(reqDataJson)
                 return respObj
           
@@ -150,11 +150,11 @@ class CardReplacementHandler:
             
             cardReplacementObj = CardReplacementApiImpl
 
-            if reqDataJson['apiname'] == "CARD_REPLCMNT_VAL":
+            if reqDataJson['api_name'] == "CARD_REPLCMNT_VAL":
                 respObj =   cardReplacementObj.CardReplacementValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "CARD_REPLCMNT_EXE":
+            elif reqDataJson['api_name'] == "CARD_REPLCMNT_EXE":
                 respObj =   cardReplacementObj.CardReplacementExecution(reqDataJson)
                 return respObj
           
@@ -172,11 +172,11 @@ class CardIssueHandler:
             
             cardReplacementObj = CardIssueApiImpl
 
-            if reqDataJson['apiname'] == "CARD_ISSUE_VAL":
+            if reqDataJson['api_name'] == "CARD_ISSUE_VAL":
                 respObj =   cardReplacementObj.CardIssueValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "CARD_ISSUE_EXE":
+            elif reqDataJson['api_name'] == "CARD_ISSUE_EXE":
                 respObj =   cardReplacementObj.CardIssueExecutuion(reqDataJson)
                 return respObj
           
@@ -194,11 +194,11 @@ class CardActivationHandler:
             
             cardActivationObj = CardActivationApiImpl
 
-            if reqDataJson['apiname'] == "CARD_ACT_VAL":
+            if reqDataJson['api_name'] == "CARD_ACT_VAL":
                 respObj =   cardActivationObj.CardActivationValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "CARD_ACT_EXE":
+            elif reqDataJson['api_name'] == "CARD_ACT_EXE":
                 respObj =   cardActivationObj.CardActivationExecutuion(reqDataJson)
                 return respObj
           
@@ -216,11 +216,11 @@ class CardUpgradationHandler:
             
             cardUpgradationObj = CardUpgradationApiImpl
 
-            if reqDataJson['apiname'] == "CARD_UPGRADE_VAL":
+            if reqDataJson['api_name'] == "CARD_UPGRADE_VAL":
                 respObj =   cardUpgradationObj.CardUpgradationValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "CARD_UPGRADE_EXE":
+            elif reqDataJson['api_name'] == "CARD_UPGRADE_EXE":
                 respObj =   cardUpgradationObj.CardUpgradationExecution(reqDataJson)
                 return respObj
           
@@ -238,7 +238,7 @@ class CustDetailEnquiryHandler:
             
             CustDetailEnquiryObj = CustDetailEnquiryApiImpl
 
-            if reqDataJson['apiname'] == "CUST_DET_ENQ":
+            if reqDataJson['api_name'] == "CUST_DET_ENQ":
                 respObj =   CustDetailEnquiryObj.CustDetailEnquiry(reqDataJson)
                 return respObj
 
@@ -256,11 +256,11 @@ class VirtualCardHandler:
             
             virtualCardObj = VirtualCardApiImpl
 
-            if reqDataJson['apiname'] == "VIRTUAL_CARD_VAL":
+            if reqDataJson['api_name'] == "VIRTUAL_CARD_VAL":
                 respObj =   virtualCardObj.virtualCardValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "VIRTUAL_CARD_EXE":
+            elif reqDataJson['api_name'] == "VIRTUAL_CARD_EXE":
                 respObj =   virtualCardObj.virtualCardExecution(reqDataJson)
                 return respObj
           
@@ -278,11 +278,11 @@ class VirtualToPhysicalHandler:
             
             virtualToPhysicalObj = Virtual2PhysicalApiImpl
 
-            if reqDataJson['apiname'] == "VIRTUAL_PHYSCL_CARD":
+            if reqDataJson['api_name'] == "VIRTUAL_PHYSCL_CARD":
                 respObj =   virtualToPhysicalObj.virtual2PhysicalValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "VIRTUAL_PHYSCL_CARD_EXE":
+            elif reqDataJson['api_name'] == "VIRTUAL_PHYSCL_CARD_EXE":
                 respObj =   virtualToPhysicalObj.virtual2PhysicalExecution(reqDataJson)
                 return respObj
           
@@ -300,11 +300,11 @@ class AdjsAccBlncHandler:
             
             adjstacntblncObj = AdjstAcntBlncApiImpl
 
-            if reqDataJson['apiname'] == "ADJST_ACC_BLNC_VAL":
+            if reqDataJson['api_name'] == "ADJST_ACC_BLNC_VAL":
                 respObj =   adjstacntblncObj.adjstAcntBlncValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "ADJST_ACC_BLNC_EXE":
+            elif reqDataJson['api_name'] == "ADJST_ACC_BLNC_EXE":
                 respObj =   adjstacntblncObj.adjstAcntBlncExecution(reqDataJson)
                 return respObj
           
@@ -323,11 +323,11 @@ class AccountLoadHandler:
             
             accloadObj = AccountLoadApiImpl
 
-            if reqDataJson['apiname'] == "ACC_LOAD_VAL":
+            if reqDataJson['api_name'] == "ACC_LOAD_VAL":
                 respObj =   accloadObj.AccountLoadValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "ACC_LOAD_EXE":
+            elif reqDataJson['api_name'] == "ACC_LOAD_EXE":
                 respObj =   accloadObj.AccountLoadExecution(reqDataJson)
                 return respObj
           
@@ -346,7 +346,7 @@ class SetPinHandler:
             
             accloadObj = SetPinApiImpl
 
-            if reqDataJson['apiname'] == "SET_PIN":
+            if reqDataJson['api_name'] == "SET_PIN":
                 respObj =   accloadObj.setPin(reqDataJson)
                 return respObj
 
@@ -364,7 +364,7 @@ class ChangePinHandler:
             
             accloadObj = ChangePinApiImpl
 
-            if reqDataJson['apiname'] == "CHANGE_PIN":
+            if reqDataJson['api_name'] == "CHANGE_PIN":
                 respObj =   accloadObj.changePin(reqDataJson)
                 return respObj
 
@@ -382,7 +382,7 @@ class VerifyPinExeHandler:
             
             verifyObj = VerifyPinExeApiImpl
 
-            if reqDataJson['apiname'] == "VERIFY_PIN_EXE":
+            if reqDataJson['api_name'] == "VERIFY_PIN_EXE":
                 respObj =   verifyObj.verifyPinExe(reqDataJson)
                 return respObj
 
@@ -401,7 +401,7 @@ class txndetenqHandler:
             
             TnxDetENQObj = TnxEnqPinApiImpl
 
-            if reqDataJson['apiname'] == "TXN_DET_ENQ":
+            if reqDataJson['api_name'] == "TXN_DET_ENQ":
                 respObj =   TnxDetENQObj.tnxdetenq(reqDataJson)
                 return respObj
 
@@ -420,11 +420,11 @@ class GiftCardHandler:
             
             accloadObj = GiftCardApiImpl
 
-            if reqDataJson['apiname'] == "GIFT_CARD_VAL":
+            if reqDataJson['api_name'] == "GIFT_CARD_VAL":
                 respObj =   accloadObj.GiftCardValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "GIFT_CARD_EXE":
+            elif reqDataJson['api_name'] == "GIFT_CARD_EXE":
                 respObj =   accloadObj.GiftCardExecution(reqDataJson)
                 return respObj
           
@@ -444,7 +444,7 @@ class CvvVerificationHandler:
             
             verifyObj = CvvVerificationApiImpl
 
-            if reqDataJson['apiname'] == "CVV2_VERFCTN":
+            if reqDataJson['api_name'] == "CVV2_VERFCTN":
                 respObj =   verifyObj.CvvVerification(reqDataJson)
                 return respObj
 
@@ -462,7 +462,7 @@ class CardDetailEnqHandler:
             
             verifyObj = CardDetailsEnqApiImpl
 
-            if reqDataJson['apiname'] == "CARD_DET_ENQ":
+            if reqDataJson['api_name'] == "CARD_DET_ENQ":
                 respObj =   verifyObj.CardDetailsEnq(reqDataJson)
                 return respObj
 
@@ -480,7 +480,7 @@ class channelupdateHandler:
             
             verifyObj = ChannelUpateApiImpl
 
-            if reqDataJson['apiname'] == "CHANNEL_UPDT":
+            if reqDataJson['api_name'] == "CHANNEL_UPDT":
                 respObj =   verifyObj.ChannelUpadte(reqDataJson)
                 return respObj
 
@@ -501,7 +501,7 @@ class LimitUpdateHandler:
             
             verifyObj = LimitUpateApiImpl
 
-            if reqDataJson['apiname'] == "LIMIT_UPDT":
+            if reqDataJson['api_name'] == "LIMIT_UPDT":
                 respObj =   verifyObj.LimitUpadte(reqDataJson)
                 return respObj
 
@@ -522,7 +522,7 @@ class LimitChannelUpdateHandler:
             
             verifyObj = LimitChannelUpdateApiImpl
 
-            if reqDataJson['apiname'] == "LIMIT_CHANNEL_UPDT":
+            if reqDataJson['api_name'] == "LIMIT_CHANNEL_UPDT":
                 respObj =   verifyObj.LimitChannelupadte(reqDataJson)
                 return respObj
 

@@ -42,14 +42,12 @@ def backendapi(req):
     print("XXXXXX")
     request = req.get_json()
     try:
-        
         datadict = {"req_type":request['req_type'],"req_code":request['req_code'],
                     "apiname":request['apiname'],"em_reqid":request['em_reqid'],
                     "partner_reqid":request['partner_reqid'],"requestdata":request['requestdata'],"authToken":request['authtoken'],"em_endpoint":request['em_endpoint'],
                     "em_custid":request['em_custid'],"txntype":request["txntype"],"hash":request['hash'],"checksum":request['checksum']}
 
         obj = standardresponses.commonValues[request['apiname']]  #eg:CORTEX
-      
         print("datadict",datadict)
         otherdata = {}
         # modulename = 'LOGIN'
@@ -61,20 +59,17 @@ def backendapi(req):
         print("=========resposne from CORE is=====")
         print("TYPE====",type(FisCoreResp))
         print("VALUE===",FisCoreResp)
-        FisCoreResp=json.loads(FisCoreResp)
+
         if FisCoreResp['resp_type'] == "FAILURE":
             return FisCoreResp
 
 # for external api
         elif FisCoreResp['resp_type'] == "SUCCESS":
-            print(" entered elif fiscoreresp")
-
-            try:
                 ewireReqData = {
-                    "em_reqid": FisCoreResp['em_reqid'],
+                    "ewire_reqid": FisCoreResp['ewire_reqid'],
                     "timestamp" : str(urlconstants.TIME_NOW),
-                    "em_custid" : FisCoreResp['em_custid'],
-                    "apiname": FisCoreResp['api_name'],
+                    "ewire_custid" : FisCoreResp['ewire_custid'],
+                    "apiname": FisCoreResp['apiname'],
                     "partner_id" : FisCoreResp['partner_id'],
                     "ext_base_url": FisCoreResp['ext_base_url'],
                     "ext_end_point_url": FisCoreResp['ext_end_point_url'],
@@ -82,14 +77,6 @@ def backendapi(req):
                     "api_header": FisCoreResp['api_header'], #Header for api provider
                     "req_data": FisCoreResp['req_data'] # req data for api provider
                 }
-            except Exception as e:
-                print("exception",str(e))
-                return str(e)
-            except ValueError as e:
-                print("exception2",str(e))
-                return str(e)
-
-
         print("apiheader type "+str(type(FisCoreResp['api_header'])))
         print("===========ewireReqData======")
         print(ewireReqData)
