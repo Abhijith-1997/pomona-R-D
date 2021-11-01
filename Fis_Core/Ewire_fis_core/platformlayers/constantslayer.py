@@ -71,22 +71,40 @@ def callmaass4hashing(hashinput, modulename):
 
 timeStamp = str(datetime.datetime.now())
 def getDetails(request):
-    print("insidde  getDetails")
+    print("inside  getDetails")
+    
     try: 
         modPartyObj = staticfunctions.CommonUtil
         resp = modPartyObj.getByApiName(request)
-                # print("RESPONSE FROM GET API BY NAME ==> ",resp)
+        print("RESPONSE FROM GET API BY NAME ==> ",resp)
 
-        if bool(resp): 
-            responseObj = staticfunctions.CommonResponse("SUCCESS","800",request['ewire_reqid'],timeStamp,resp['cust_id'],request['api_name'],resp['partner_id'],resp['ext_base_url'],resp['ext_end_point_name'],resp['api_header'],{},resp['req_data'],False)
+
+        print("request from be",request)
+        print("request from DB",resp)
+        
+
+        if bool(resp):
+            print("bool resp")
+            respdata= staticconstants.success_resp(request,resp)
+            print("respdata",respdata)
+
+            # make dictionary and pass it inside the commonresponse
+            responseObj = staticfunctions.CommonResponse(respdata)
+            print("success responseobject",responseObj)
                 
         else:
-            response_dict = {"resp_from_core":"request attrubute not exist"}
-            responseObj = staticfunctions.CommonResponse("FAILURE","802",request['ewire_reqid'],timeStamp,"",request['api_name'],"","","",{},response_dict,{},False)
+            response_dict = {"resp_from_core":"request attribute does not exist"}
+            respdata= staticconstants.failure_resp(request,resp)
+
+            responseObj = staticfunctions.CommonResponse(respdata)
+
+
 
     except Exception as e:
         response_dict = {"resp_from_core":str(e)}
-        responseObj = staticfunctions.CommonResponse("FAILURE","802",request['ewire_reqid'],timeStamp,"",request['api_name'],"","","",{},response_dict,{},False)
+        respdata= staticconstants.failure_resp(request,resp)
+
+        responseObj = staticfunctions.CommonResponse(respdata)
 
     commonRespObj = staticfunctions.CommonResponse
     response = commonRespObj.classToJsonObj(responseObj)
