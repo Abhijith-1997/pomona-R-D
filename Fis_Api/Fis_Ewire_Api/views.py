@@ -24,6 +24,10 @@ def authResponse():
 @app.route(baseUrl+'/cardorder', methods = ['GET','POST'])
 def cardorder():
     print("enterd card order views")
+    print("///////////////////////////////")
+    print("request",request)
+    print("///////////////////////////////")
+
     cardOrderRespObj = CardOrderHandler
     temp = cardOrderRespObj.cardOrderMapper(request)
     return temp
