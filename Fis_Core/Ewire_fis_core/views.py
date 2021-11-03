@@ -71,7 +71,7 @@ def getApiName():
         elif reqDataJson["apiname"] == "CARD_REPLCMNT_VAL":
             return constantslayer.getDetails(reqDataJson)
         
-        elif reqDataJson["apiname"] == "CUST_REPLCMNT_EXE":
+        elif reqDataJson["apiname"] == "CARD_REPLCMNT_EXE":
             return constantslayer.getDetails(reqDataJson)
         
 

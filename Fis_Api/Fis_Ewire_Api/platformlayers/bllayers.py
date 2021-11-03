@@ -82,11 +82,11 @@ class CardEnquiryHandler:
             
             cardEquiryObj = CardEnqiuryApiImpl
 
-            if reqDataJson['apiname'] == "CARD_CNCL_VAL":
+            if reqDataJson['apiname'] == "CARD_ENQ_VAL":
                 respObj =  cardEquiryObj.cardEnquiryValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "CARD_CNCL_EXE":
+            elif reqDataJson['apiname'] == "CARD_ENQ_EXE":
                 respObj =  cardEquiryObj.cardEnquiryExecution(reqDataJson)
                 return respObj
           

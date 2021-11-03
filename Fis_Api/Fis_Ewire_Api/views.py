@@ -21,7 +21,7 @@ def authResponse():
     return temp
 
 #Card Order – Non-perso (Insta-kit)
-@app.route(baseUrl+'/cardorder', methods = ['GET','POST'])
+@app.route(baseUrl+'/cardorder', methods = ['POST'])
 def cardorder():
     print("enterd card order views")
     print("///////////////////////////////")
