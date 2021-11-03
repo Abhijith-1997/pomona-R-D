@@ -104,11 +104,11 @@ class CardStatusHandler:
             
             cardStatusObj = CardStatusApiImpl
 
-            if reqDataJson['apiname'] == "CARD_CNCL_VAL":
+            if reqDataJson['apiname'] == "CARD_STATUS_VAL":
                 respObj =  cardStatusObj.cardStatusValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "CARD_CNCL_EXE":
+            elif reqDataJson['apiname'] == "CARD_STATUS_EXE":
                 respObj =  cardStatusObj.cardStatusExecution(reqDataJson)
                 return respObj
           

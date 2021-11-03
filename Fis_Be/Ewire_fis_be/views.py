@@ -15,7 +15,7 @@ def base():
     
     Response()
 
-    return responses.upGet
+    return responses.upGetResponse
 @app.route(baseUrl+'/cortex', methods = ['POST'])
 def user():
     valdata=validateReq(request)
