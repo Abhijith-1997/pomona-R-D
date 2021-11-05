@@ -75,7 +75,7 @@ def getApiName():
             return constantslayer.getDetails(reqDataJson)
         
 
-        elif reqDataJson["apiname"] == "CARD_ISSUE_VAL'":
+        elif reqDataJson["apiname"] == "CARD_ISSUE_VAL":
             return constantslayer.getDetails(reqDataJson)
 
         elif reqDataJson["apiname"] == "CARD_ISSUE_EXE":
@@ -103,12 +103,12 @@ def getApiName():
             return constantslayer.getDetails(reqDataJson)
 
         
-        elif reqDataJson["apiname"] == "VIRTUAL_CARD_EXE":
-            return constantslayer.getDetails(reqDataJson)
+        # elif reqDataJson["apiname"] == "VIRTUAL_CARD_EXE":
+        #     return constantslayer.getDetails(reqDataJson)
 
 
-        elif reqDataJson["apiname"] == "VIRTUAL_PHYSCL_CARD":
-            return constantslayer.getDetails(reqDataJson)
+        # elif reqDataJson["apiname"] == "VIRTUAL_PHYSCL_CARD":
+        #     return constantslayer.getDetails(reqDataJson)
 
 
         elif reqDataJson["apiname"] == "VIRTUAL_PHYSCL_CARD_EXE":
@@ -122,6 +122,9 @@ def getApiName():
             return constantslayer.getDetails(reqDataJson)
         
         elif reqDataJson["apiname"] == "ACC_LOAD_EXE":
+            return constantslayer.getDetails(reqDataJson)
+        
+        elif reqDataJson["apiname"] == "ACC_LOAD_VAL":
             return constantslayer.getDetails(reqDataJson)
 
         elif reqDataJson["apiname"] == "SET_PIN":
@@ -154,8 +157,8 @@ def getApiName():
         elif reqDataJson["apiname"] == "LIMIT_UPDT":
             return constantslayer.getDetails(reqDataJson)
 
-        elif reqDataJson["apiname"] == "CARD_DET_ENQ":
-            return constantslayer.getDetails(reqDataJson)
+        # elif reqDataJson["apiname"] == "CARD_DET_ENQ":
+        #     return constantslayer.getDetails(reqDataJson)
 
 
 

@@ -171,22 +171,22 @@ commonValues['VIRTUAL_CARD_VAL'] = {
                         }
 
 
-commonValues['VIRTUAL_CARD_EXE'] = {                           
-                            "server" : ipconstants.fisCoreServer,
-                            "headerz" : ipconstants.fisCoreHeader,
-                           "endpoint" : ipconstants.fisCoreEndpoint,
-                            "reqtype" : "/hkjh",
-                            "methodtype" : ipconstants.fisCoreMethodType
-                        }
+# commonValues['VIRTUAL_CARD_EXE'] = {                           
+#                             "server" : ipconstants.fisCoreServer,
+#                             "headerz" : ipconstants.fisCoreHeader,
+#                            "endpoint" : ipconstants.fisCoreEndpoint,
+#                             "reqtype" : "/hkjh",
+#                             "methodtype" : ipconstants.fisCoreMethodType
+#                         }
 
 
-commonValues['VIRTUAL_PHYSCL_CARD'] = {                           
-                            "server" : ipconstants.fisCoreServer,
-                            "headerz" : ipconstants.fisCoreHeader,
-                           "endpoint" : ipconstants.fisCoreEndpoint,
-                            "reqtype" : "/hkjh",
-                            "methodtype" : ipconstants.fisCoreMethodType
-                        }
+# commonValues['VIRTUAL_PHYSCL_CARD'] = {                           
+#                             "server" : ipconstants.fisCoreServer,
+#                             "headerz" : ipconstants.fisCoreHeader,
+#                            "endpoint" : ipconstants.fisCoreEndpoint,
+#                             "reqtype" : "/hkjh",
+#                             "methodtype" : ipconstants.fisCoreMethodType
+#                         }
 
 
 commonValues['VIRTUAL_PHYSCL_CARD_EXE'] = {                           

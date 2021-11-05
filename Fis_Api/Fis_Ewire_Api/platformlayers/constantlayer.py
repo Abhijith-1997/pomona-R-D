@@ -413,42 +413,42 @@ class VirtualCardApiImpl:
         except Exception as e:
             return {"resp_type":"FAILURE","resp_code":"9004","message":str(e)}
     
-    def virtualCardExecution(req):
-        try:
-            URL = Constants.API_SERVICE + Constants.VIRTUALCARD_ENDPOINT
-            print(">>>>><<<<<fwReqDATAJSON",req)
-            fwReqJson = req['req_data']
-            headers1 = CommonResponse.get_auth_head(CommonResponse,Constants.AUTH_TOKEN_URL,Constants.TOKEN_HEADER,1)
-            print("header from authenticate : : : ",headers1)
-            print("REQUESTS data",fwReqJson)
-            print("REQUESTS data",type(fwReqJson))
-            fwReqJson = json.dumps(fwReqJson)
+    # def virtualCardExecution(req):
+    #     try:
+    #         URL = Constants.API_SERVICE + Constants.VIRTUALCARD_ENDPOINT
+    #         print(">>>>><<<<<fwReqDATAJSON",req)
+    #         fwReqJson = req['req_data']
+    #         headers1 = CommonResponse.get_auth_head(CommonResponse,Constants.AUTH_TOKEN_URL,Constants.TOKEN_HEADER,1)
+    #         print("header from authenticate : : : ",headers1)
+    #         print("REQUESTS data",fwReqJson)
+        #     print("REQUESTS data",type(fwReqJson))
+        #     fwReqJson = json.dumps(fwReqJson)
 
-            fisResp = CommonUtil.postrequestManager(URL,headers1,fwReqJson)
-            print(" end virtual card execution>>>>>???????????",str(fisResp))
-            isValid = ValidateResp.validateObj(fisResp)
-            return isValid
-        except Exception as e:
-            return {"resp_type":"FAILURE","resp_code":"9004","message":str(e)}
+        #     fisResp = CommonUtil.postrequestManager(URL,headers1,fwReqJson)
+        #     print(" end virtual card execution>>>>>???????????",str(fisResp))
+        #     isValid = ValidateResp.validateObj(fisResp)
+        #     return isValid
+        # except Exception as e:
+        #     return {"resp_type":"FAILURE","resp_code":"9004","message":str(e)}
         
 class Virtual2PhysicalApiImpl:
-    def virtual2PhysicalValidation(req):
-        try:
-            URL = Constants.API_SERVICE + Constants.VIRTUAL_PHYSICAL_ENDPOINT
-            print(">>>>><<<<<fwReqDATAJSON",req)
-            fwReqJson = req['req_data']
-            headers1 = CommonResponse.get_auth_head(CommonResponse,Constants.AUTH_TOKEN_URL,Constants.TOKEN_HEADER,1)
-            print("header from authenticate : : : ",headers1)
-            print("REQUESTS data",fwReqJson)
-            print("REQUESTS data",type(fwReqJson))
-            fwReqJson = json.dumps(fwReqJson)
+    # def virtual2PhysicalValidation(req):
+    #     try:
+    #         URL = Constants.API_SERVICE + Constants.VIRTUAL_PHYSICAL_ENDPOINT
+    #         print(">>>>><<<<<fwReqDATAJSON",req)
+    #         fwReqJson = req['req_data']
+    #         headers1 = CommonResponse.get_auth_head(CommonResponse,Constants.AUTH_TOKEN_URL,Constants.TOKEN_HEADER,1)
+    #         print("header from authenticate : : : ",headers1)
+    #         print("REQUESTS data",fwReqJson)
+    #         print("REQUESTS data",type(fwReqJson))
+    #         fwReqJson = json.dumps(fwReqJson)
 
-            fisResp = CommonUtil.postrequestManager(URL,headers1,fwReqJson)
-            print(" end virtual 2 physical card validation>>>>>???????????",str(fisResp))
-            isValid = ValidateResp.validateObj(fisResp)
-            return isValid
-        except Exception as e:
-            return {"resp_type":"FAILURE","resp_code":"9004","message":str(e)}
+    #         fisResp = CommonUtil.postrequestManager(URL,headers1,fwReqJson)
+    #         print(" end virtual 2 physical card validation>>>>>???????????",str(fisResp))
+        #     isValid = ValidateResp.validateObj(fisResp)
+        #     return isValid
+        # except Exception as e:
+            # return {"resp_type":"FAILURE","resp_code":"9004","message":str(e)}
     
     def virtual2PhysicalExecution(req):
         try:

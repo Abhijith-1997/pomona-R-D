@@ -260,9 +260,9 @@ class VirtualCardHandler:
                 respObj =   virtualCardObj.virtualCardValidation(reqDataJson)
                 return respObj
 
-            elif reqDataJson['apiname'] == "VIRTUAL_CARD_EXE":
-                respObj =   virtualCardObj.virtualCardExecution(reqDataJson)
-                return respObj
+            # elif reqDataJson['apiname'] == "VIRTUAL_CARD_EXE":
+            #     respObj =   virtualCardObj.virtualCardExecution(reqDataJson)
+            #     return respObj
           
         except Exception as e:          
             print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
@@ -278,11 +278,11 @@ class VirtualToPhysicalHandler:
             
             virtualToPhysicalObj = Virtual2PhysicalApiImpl
 
-            if reqDataJson['apiname'] == "VIRTUAL_PHYSCL_CARD":
-                respObj =   virtualToPhysicalObj.virtual2PhysicalValidation(reqDataJson)
-                return respObj
+            # if reqDataJson['apiname'] == "VIRTUAL_PHYSCL_CARD":
+            #     respObj =   virtualToPhysicalObj.virtual2PhysicalValidation(reqDataJson)
+            #     return respObj
 
-            elif reqDataJson['apiname'] == "VIRTUAL_PHYSCL_CARD_EXE":
+            if reqDataJson['apiname'] == "VIRTUAL_PHYSCL_CARD_EXE":
                 respObj =   virtualToPhysicalObj.virtual2PhysicalExecution(reqDataJson)
                 return respObj
           
@@ -463,7 +463,7 @@ class CardDetailEnqHandler:
             verifyObj = CardDetailsEnqApiImpl
 
             if reqDataJson['apiname'] == "CARD_DET_ENQ":
-                respObj =   verifyObj.CardDetailsEnq(reqDataJson)
+                respObj =   verifyObj.CardDetailsEn(reqDataJson)
                 return respObj
 
         except Exception as e:          
